@@ -1,0 +1,29 @@
+.col-xs-12
+  .clearfix
+    .order-back
+      = link_to t(:back_to_orders), orders_path
+    %h1.pull-left
+      = t(:order)
+      = @order.number
+    .order-status
+        #{@order.state}
+  .order.clearfix
+    - unless @order_items.blank?
+      = render 'order_steps/order_details', order_items: @order_items
+      .clearfix
+        .pull-right
+          .subtotal.clearfix
+            .pull-right
+              %strong= number_to_currency(@order.total_price)
+              %br/
+              %strong= number_to_currency(@order.delivery_method.price)
+            .pull-right
+              = t(:subtotal_)
+              = succeed t(:shipping) do
+                %br/
+      .clearfix.total
+        .pull-right.subtotal
+          = t(:order_total)
+          %strong= number_to_currency(@order_total)
+    - else
+      %p= t(:no_orders)

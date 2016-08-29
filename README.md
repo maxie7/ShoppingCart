@@ -1,8 +1,8 @@
-= ShoppingCart
+== ShoppingCart
 
 This project rocks and uses MIT-LICENSE.
 
-= Mounting the Engine
+== Mounting the Engine
 
 Specify the engine inside the Gemfile:
   gem 'shopping_cart', path: "/path/to/shopping_cart"

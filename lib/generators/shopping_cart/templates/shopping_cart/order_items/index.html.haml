@@ -1,0 +1,38 @@
+.col-xs-12
+  .cart.clearfix
+    - unless @order_items.blank?
+      = form_tag(main_app.update_all_order_items_path, controller: 'order_items', action: :update_all, method: :put) do
+        %table.table.table-condensed
+          %thead
+            %tr
+              %th{:colspan => "2"}= t(:book_)
+              %th= t(:price)
+              %th= t(:qty)
+              %th= t(:total)
+              %th  
+          %tbody
+            - @order_items.each do |item|
+              %tr
+                %td= link_to(image_tag(item.product.image.thumb), main_app.book_path(item.product))
+                %td
+                  %div= item.product.title
+                  %p= truncate(item.product.description, length: 600)
+                %td.price= number_to_currency(item.price)
+                %td= number_field_tag('quantity['+item.id.to_s+']', item.quantity, { min: 1, max: 20, class: 'form-control quantity'})
+                %td.price= number_to_currency(item.price * item.quantity)
+                %td.price.remove= link_to('&times;'.html_safe, url_for(action: :destroy, id: item.id), method: :delete, id: :delete)
+        .clearfix
+          .subtotal.pull-right
+            = t(:subtotal) + ":"
+            %strong
+              = number_to_currency(@order.total_price)
+        .form-inline.pull-right
+          = text_field_tag(:coupon, nil, placeholder: t(:coupon_code), size: 12, class:"form-control")
+          = submit_tag(t(:update_), controller: 'order_items', action: 'update', method: 'put', class: 'form-control btn btn-default')
+          = link_to(t(:checkout_), main_app.order_step_path(:address), class:'btn btn-primary')
+        = link_to(t(:empty_cart), main_app.destroy_all_order_items_path, {class:'btn btn-default', :method => 'delete'})
+        = link_to(t(:go_on_shopping), main_app.books_path, {class:'btn btn-default'})
+    - else
+      %p.center
+        = t(:empty_msg)
+        = link_to t(:letsgo_msg), main_app.books_path

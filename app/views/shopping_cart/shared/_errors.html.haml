@@ -1,0 +1,10 @@
+.text_align_center.font_opensans
+  - entity.each do |e|
+    - if e.errors.any?
+      #error_explanation
+        .alert.alert-error
+          The form contains #{pluralize(e.errors.count, "error")}.
+        %ul
+          - e.errors.full_messages.each do |msg|
+            %li
+              * #{msg}
