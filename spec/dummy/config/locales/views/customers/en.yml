@@ -1,0 +1,12 @@
+en:
+  billing_address: 'BILLING ADDRESS'
+  billing_address_: 'Billing Address'
+  email: 'E-MAIL'
+  confirm_understanding: 'I understand that all data will be lost'
+  must_confirm_consequences: "You must confirm that you understand the consequences of your action!"
+  password: 'PASSWORD'
+  remove_account: 'REMOVE_ACCOUNT'
+  save: 'SAVE'
+  settings: 'Settings'
+  shipping_address: 'SHIPPING ADDRESS'
+  shipping_address_: 'Shipping Address'
