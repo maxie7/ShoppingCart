@@ -21,7 +21,7 @@ module ShoppingCart
       private
 
       def setter
-        @order =(step == :complete) ? current_customer.orders.all_completed_orders.first : current_customer_order
+        @order =(step == :complete) ? current_customer.orders.all_completed_orders.first : current_order
         @order_steps_form = OrderStepsForm.new(@order)
       end
 

@@ -4,7 +4,7 @@ module ShoppingCart
   class OrdersController < ApplicationController
     def index
       @orders = @orders.all_completed_orders
-      @order = current_customer_order
+      @order = current_order
       @order_items = @order.products
     end
 

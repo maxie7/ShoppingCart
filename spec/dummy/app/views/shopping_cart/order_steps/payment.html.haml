@@ -1,0 +1,43 @@
+%h1= t(:checkout)
+= render 'steps'
+= form_tag(wizard_path, method: 'put') do
+  .row
+    .col-md-2
+    .col-md-3
+      %h2= t(:card_details)
+      = render partial: 'shared/errors', locals:{ entity: [@order_steps_form.credit_card]}
+      = hidden_field_tag 'credit_card[customer_id]', current_customer.id
+      .form-group
+        = text_field_tag('credit_card[number]', @order_steps_form.credit_card.number, class:'form-control', :placeholder => 'Card Number')
+      .form-group
+        = t(:expiration_date)
+        %p
+        .month-year
+          .input-group
+            .input-group-addon= t(:month_)
+            = select_tag('credit_card[expiration_month]', options_for_select(@order_steps_form.credit_card.month_list, @order_steps_form.credit_card.expiration_month), class:'form-control month')
+          &#160;
+          .input-group
+            .input-group-addon= t(:year_)
+            = select_tag('credit_card[expiration_year]', options_for_select(@order_steps_form.credit_card.year_list, @order_steps_form.credit_card.expiration_year), class:'form-control year')
+      .form-group
+        .input-group.card-code
+          .input-group-addon= t(:card_code_)
+          = password_field_tag('credit_card[CVV]', @order_steps_form.credit_card.CVV, class:'form-control card-code')
+    .col-md-2
+       
+    .col-md-4
+      .pull-left
+        %h2= t(:order_summary_)
+        .summary-title
+          %h5= t(:items_total)
+          = number_to_currency(@order.total_price)
+          %h5= t(:shipping)
+          = number_to_currency(@order.delivery_method.price)
+          %h5= t(:order_total)
+          = number_to_currency(@order.total_price + @order.delivery_method.price)
+
+  %div.center
+    = button_tag(t(:save_continue), class:'btn btn-primary', type: 'submit', name: 'payment')
+    - unless @order.credit_card_id.nil?
+      = link_to(t(:continue), shopping_cart.next_wizard_path, {class: 'btn btn-default'})

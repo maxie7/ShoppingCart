@@ -1,0 +1,35 @@
+%h1= t(:checkout)
+= render 'steps'
+= form_tag(wizard_path, method: 'put') do
+  .row
+    .col-md-2
+    .col-md-4
+      %h2= t(:delivery_method_)
+      - if @order_steps_form.delivery_methods.blank?
+        There are no delivery methods active.
+      - else
+        - @order_steps_form.delivery_methods.each do |delivery|
+          .radio
+            %label
+              = hidden_field_tag("delivery[delivery_price]", delivery.price)
+              = radio_button_tag('delivery[delivery_method_id]', delivery.id, !!( delivery.id == @order.delivery_method_id || delivery.id == 1))
+              = delivery.name
+              + #{number_to_currency(delivery.price)}
+
+       
+    .col-md-4
+      .pull-right
+        %h2= t(:order_summary_)
+        .summary-price
+          %div
+            %nobr= t(:items_total)
+            %span= number_to_currency(@order.total_price)
+            %span#checkout_items_total.hide= @order.total_price
+          %div
+            %nobr= t(:order_total)
+            %span= number_to_currency(@order.total_price)
+            %span#checkout_shipping.hide= @order.delivery_price
+  %div.center
+    = button_tag(t(:save_continue), class: 'btn btn-primary', type: 'submit', name: 'shipping')
+    - unless @order.delivery_method_id.nil?
+      = link_to(t(:continue), next_wizard_path, {class: 'btn btn-default'})

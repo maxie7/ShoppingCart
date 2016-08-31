@@ -2,35 +2,35 @@ require_dependency "shopping_cart/application_controller"
 
 module ShoppingCart
  class OrderItemsController < ApplicationController
-   before_action :current_order
+   before_action :current_order, :set_product!
 
    def index
-     @order_items = @order.order_items
+     @order_items = current_order.order_items
    end
 
    def destroy_all
-     @order.order_items.destroy_all
+     current_order.order_items.destroy_all
      flash[:success] = 'Order was successfully destroyed'
      redirect_to :back
    end
 
    def destroy
-     @order.order_items.find(params[:id]).destroy
+     current_order.order_items.find(params[:id]).destroy
      flash[:success] = 'One item from order was successfully deleted'
      redirect_to :back
    end
 
    def create
-     product = ShoppingCart.product_class.find_by_id(order_params[:product_id])
-     quantity = order_params[:quantity]
-     @order.add_product(product,quantity.to_i)
-     flash[:success] = 'Product was successfully added to cart.'
-     redirect_to(:back)
+     if current_order.add_product(@product, params[:quantity])
+       redirect_to :back, notice: t('cart.added')
+     else
+       redirect_to :back, alert: t('cart.not_added')
+     end
    end
 
    def update
      params[:quantity].each do |item_id, quantity|
-       @order.order_items.find_by_id(item_id).update(:quantity => quantity)
+       current_order.order_items.find_by_id(item_id).update(:quantity => quantity)
      end
      add_coupon unless params[:coupon].blank?
      flash[:success] = 'Order was successfully updated' if flash[:danger].nil?
@@ -59,6 +59,13 @@ module ShoppingCart
 
    def order_params
      params.require(:orders).permit(:product_id, :quantity )
+   end
+
+   protected
+
+   def set_product!
+     class_name = ShoppingCart::PRODUCT_CLASSES.find { |c| c == params[:class] }
+     @product = class_name.camelize.constantize.find( params[:format])
    end
  end
 end

@@ -4,7 +4,7 @@ class CreateShoppingCartOrderItems < ActiveRecord::Migration
       t.decimal :price
       t.integer :quantity
       t.belongs_to :order
-      t.belongs_to :product
+      t.belongs_to :product, polymorphic: true
 
       t.timestamps null: false
     end

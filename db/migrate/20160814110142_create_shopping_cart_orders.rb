@@ -5,7 +5,7 @@ class CreateShoppingCartOrders < ActiveRecord::Migration
       t.string :state
       t.string :number
       t.integer :delivery_price
-      t.belongs_to :customer
+      t.belongs_to :customer, polymorphic: true
       t.belongs_to :coupon
       t.belongs_to :order_item
       t.belongs_to :billing_address

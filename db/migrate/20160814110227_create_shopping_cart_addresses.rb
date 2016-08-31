@@ -6,7 +6,7 @@ class CreateShoppingCartAddresses < ActiveRecord::Migration
       t.string   :city
       t.string   :phone
       t.belongs_to  :country
-      t.belongs_to  :customer
+      t.belongs_to  :customer, polymorphic: true
       t.string   :first_name
       t.string   :last_name
 

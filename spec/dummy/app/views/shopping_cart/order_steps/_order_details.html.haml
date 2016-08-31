@@ -1,0 +1,17 @@
+%table.table.table-condensed
+  %thead
+    %tr
+      %th{:colspan => "2"}= t(:book_)
+      %th= t(:price)
+      %th= t(:qty)
+      %th= t(:total)
+  %tbody
+    - order_items.each do |item|
+      %tr
+        %td= link_to(image_tag(item.product.image.thumb, alt: item.product.title), main_app.book_path(item.product))
+        %td
+          %div= item.product.title
+          %p= truncate(item.product.description, length: 600)
+        %td.price= number_to_currency(item.price)
+        %td.quantity= item.quantity
+        %td.price= number_to_currency(item.price*item.quantity)

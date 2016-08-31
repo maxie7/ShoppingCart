@@ -1,0 +1,7 @@
+- @books.each do |book|
+  .col-xs-3.book
+    .thumbnail
+      %h5
+      %p.title= link_to book.title, book_path(book)
+      %hr/
+      %p.price= number_to_currency book.price

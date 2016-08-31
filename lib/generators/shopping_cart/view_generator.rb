@@ -3,7 +3,7 @@ require 'rails/generators'
 module ShoppingCart
   module Generators
     class ViewGenerator < Rails::Generators::Base
-      source_root File.expand_path("../templates/shop_cart", __FILE__)
+      source_root File.expand_path("../templates/shopping_cart", __FILE__)
 
       def copy_views
         directory "orders", "app/views/shopping_cart/orders"
