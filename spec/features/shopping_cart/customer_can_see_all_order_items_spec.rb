@@ -1,5 +1,4 @@
 require 'features/features_spec_helper'
-include ActionView::Helpers::NumberHelper
 
 feature 'view all order items, and manipulate with them' do
   given(:customer) {FactoryGirl.create(:customer)}
