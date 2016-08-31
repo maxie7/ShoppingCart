@@ -1,0 +1,45 @@
+.col-xs-12
+  %h1= t(:checkout)
+  = render 'steps'
+  .row
+    .col-md-3
+      .edit= link_to(t(:edit_), shopping_cart.wizard_path(:address))
+      %h2= t(:shipping_address_)
+      = render 'addr_details', address: @order.shipping_address
+    .col-md-3
+      .edit= link_to(t(:edit_), shopping_cart.wizard_path(:address))
+      %h2= t(:billing_address_)
+      = render 'addr_details', address: @order.billing_address
+    .col-md-3
+      .edit= link_to(t(:edit_), shopping_cart.wizard_path(:delivery))
+      %h2= t(:shipping_method_)
+      .details
+        = @order.delivery_method.name
+    .col-md-3
+      .edit= link_to(t(:edit_), shopping_cart.wizard_path(:payment))
+      %h2= t(:payment_info_)
+      .details
+        = @order.credit_card.display_number
+        %br/
+        = @order.credit_card.display_month
+        \/#{@order.credit_card.expiration_year}
+  .order.clearfix
+    = render 'order_details', order_items: @order.products
+    .clearfix
+      .pull-right
+        .subtotal.clearfix
+          .pull-right
+            %strong= number_to_currency(@order.total_price)
+            %br/
+            %strong= number_to_currency(@order.delivery_method.price)
+          .pull-right
+            = t(:subtotal) + ":"
+            = succeed t(:shipping) do
+              %br/
+    .clearfix.total
+      .pull-right.subtotal
+        = t(:order_total)
+        %strong= number_to_currency(@order.total_price + @order.delivery_method.price)
+    %div.center{style: "margin-bottom: 15px"}
+      = form_tag(shopping_cart.wizard_path, method: 'put') do
+        = button_tag(t(:place_order), class: 'btn btn-primary', type: 'submit', name: 'confirm')

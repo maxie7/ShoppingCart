@@ -27,6 +27,9 @@ module Dummy
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    ShoppingCart.setup do |x|
+      x.set_order_on_each_request = true
+    end
   end
 end
-

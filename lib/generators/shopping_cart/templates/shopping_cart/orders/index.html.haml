@@ -1,0 +1,37 @@
+.col-xs-12
+  .orders.clearfix
+    %h1= t(:orders)
+    %h2= t(:in_progress)
+    - unless @order_items.blank?
+      .order
+        = render 'order_steps/order_details', order_items: @order_items
+        .clearfix
+          .subtotal.pull-right
+            = t(:subtotal_)
+            \&nbsp;
+            %strong= number_to_currency(@order.total_price)
+          = link_to t(:go_to_cart), order_items_path, class: 'btn btn-primary'
+    - else
+      %p
+        = t(:no_orders)
+        \&hellip; #{link_to t(:letsgo_msg), books_path}
+    %div &nbsp;
+    - unless (@orders.nil?)
+      - previous_state = ''
+      - @orders.each do |order|
+        - if previous_state != order.state
+          %h2= order.state.upcase
+          %table.table.table-condensed.no-borders
+            %thead
+              %tr
+                %th{:width => "40%"}= t(:number_)
+                %th{:width => "30%"}= t(:completed_at)
+                %th{:width => "20%"}= t(:total)
+                %th{:width => "10%"} &nbsp;
+            %tbody
+        %tr
+          %td= order.number
+          %td= date_format(order.completed_date)
+          %td= number_to_currency(order.total_price+order.delivery_method.price)
+          %td= link_to t(:view_), order_path(order)
+        - previous_state = order.state

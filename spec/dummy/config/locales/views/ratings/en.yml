@@ -1,0 +1,9 @@
+en:
+  add_review_: 'Add review'
+  enter_title: 'Enter title'
+  enter_review: 'Enter review'
+  enter_rating: 'Enter rating'
+  new_review_for: 'New review for '
+  rate_book: 'Rate this book'
+  rate_how_many_stars: "Rate how many star(s) you'll give?"
+  submit: "Submit"

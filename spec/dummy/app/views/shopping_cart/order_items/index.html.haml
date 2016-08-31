@@ -1,0 +1,36 @@
+.cart.clearfix
+  - unless @order_items.blank?
+    = form_tag(main_app.update_all_order_items_path, controller: 'order_items', action: :update_all, method: :put) do
+      %table.table.table-condensed
+        %thead
+          %tr
+            %th{:colspan => "2"} BOOK
+            %th PRICE
+            %th QTY
+            %th TOTAL
+            %th  
+        %tbody
+          - @order_items.each do |item|
+            %tr
+              %td= link_to(image_tag(item.product.image.thumb), main_app.book_path(item.product))
+              %td
+                %div= item.product.title
+                %p= item.product.description
+              %td.price= number_to_currency(item.price)
+              %td= number_field_tag('quantity['+item.id.to_s+']', item.quantity, { min: 1, max: 20, class: 'form-control quantity'})
+              %td.price= number_to_currency(item.price*item.quantity)
+              %td.price.remove= link_to('&times;'.html_safe, url_for(action: :destroy, id: item.id), method: :delete, id: :delete)
+      .clearfix
+        .subtotal.pull-right
+          SUBTOTAL:  
+          %strong
+            $#{@order.total_price}
+      .form-inline.pull-right
+        = text_field_tag(:coupon, nil, placeholder: 'Coupon code', size: 12, class: "form-control")
+        = submit_tag('UPDATE', :controller => 'order_items', :action => 'update',:method => 'put', :class => 'btn btn-default')
+        = link_to('CHECKOUT', main_app.order_step_path(:address), :class => 'btn btn-default')
+      = link_to('EMPTY CART', main_app.destroy_all_order_items_path, {:class => 'btn btn-default', :method => 'delete'})
+      = link_to('CONTINUE SHOPPING', main_app.books_path, {:class => 'btn btn-default'})
+  - else
+    %p
+      Shopping cart is empty... #{link_to 'Get started shopping!', main_app.books_path}

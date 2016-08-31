@@ -1,0 +1,42 @@
+.col-xs-12
+  .checkout.clearfix
+    %h1
+      =t(:order) + " #{@order.number}"
+    .row
+      .col-md-3
+        %h2= t(:shipping_address)
+        = render 'addr_details', address: @order.shipping_address
+      .col-md-3
+        %h2= t(:billing_address)
+        = render 'addr_details', address: @order.billing_address
+      .col-md-3
+        %h2= t(:shipping_method)
+        .details
+          = @order.delivery_method.name
+      .col-md-3
+        %h2= t(:payment_info)
+        .details
+          = @order.credit_card.display_number
+          %br/
+          = @order.credit_card.display_month
+          \/#{@order.credit_card.expiration_year}
+  .order.clearfix
+    = render 'order_details', order_items: @order.books
+    .clearfix
+      .pull-right
+        .subtotal.clearfix
+          .pull-right
+            %strong= number_to_currency(@order.total_price)
+            %br/
+            %strong= number_to_currency(@order.delivery_method.price)
+          .pull-right
+            = t(:subtotal) + ":"
+            = succeed t(:shipping) do
+              %br/
+    .clearfix.total
+      .pull-right.subtotal
+        = t(:order_total)
+        %strong= number_to_currency(@order.total_price+@order.delivery_method.price)
+        %br/
+  %div.center{style: "margin-bottom: 15px"}
+    = link_to(t(:go_back_to_store), main_app.root_path, {class: 'btn btn-primary'})

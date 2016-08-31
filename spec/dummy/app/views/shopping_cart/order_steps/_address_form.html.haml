@@ -1,0 +1,21 @@
+= f.label :first_name
+= t(:mark_)
+= f.text_field :first_name, class: 'form-control'
+= f.label :last_name
+= t(:mark_)
+= f.text_field :last_name, class: 'form-control'
+= f.label :address
+= t(:mark_)
+= f.text_field :address, class: 'form-control'
+= f.label :city
+= t(:mark_)
+= f.text_field :city, class: 'form-control'
+= f.label :country_id
+= f.select :country_id, options_from_collection_for_select(Country.all, :id, :name),{}, class: 'form-control'
+= f.label :zipcode
+= t(:mark_)
+= f.text_field :zipcode, class: 'form-control'
+= f.label :phone
+= t(:mark_)
+= f.text_field :phone, class: 'form-control'
+&#160;

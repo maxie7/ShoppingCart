@@ -1,0 +1,17 @@
+en:
+  admin_dashboard: 'Back-Office'
+  cart_upcase: 'CART'
+  didnt_get_confirm_instructions: "Didn't receive confirmation instructions?"
+  didnt_get_unlock_instructions: "Didn't receive unlock instructions?"
+  empty: "EMPTY"
+  forgot_password: "Forgot your password?"
+  home_upcase: 'HOME'
+  log_in: 'Log in'
+  or_: 'or'
+  resend_unlock_instructions: "Resend unlock instructions"
+  shop_name: "Mr Robot's Bookstore"
+  shop_upcase: 'SHOP'
+  shop: 'Shop'
+  sign_out: 'Sign out'
+  sign_in: 'Sign in'
+  sign_up: 'Sign up'

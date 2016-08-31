@@ -1,0 +1,39 @@
+%h1= t(:checkout)
+= render 'steps'
+= form_tag(wizard_path, method: 'put') do
+  .row
+    .col-md-4.col-lg-3.col-lg-offset-1
+      %h2= t(:billing_address)
+      = fields_for :billing_address, @order_steps_form.billing_address do |f|
+        = render partial: 'shared/errors', locals:{ entity: [@order_steps_form.billing_address] }
+        = render partial: 'address_form', address: @order_steps_form.billing_address, locals: {f: f}
+    .col-md-4.col-lg-3.col-lg-offset-1
+      %h2= t(:shipping_address)
+      #advancedopts{ style: "display:none;"}
+        = fields_for :shipping_address, @order_steps_form.shipping_address do |f|
+          = render partial: 'shared/errors', locals:{ entity: [@order_steps_form.shipping_address] }
+          = render partial: 'address_form', address: @order_steps_form.shipping_address, locals: {f: f}
+      .checkbox
+        %label
+          #{check_box('shipping', 'check', checked: true, id: "advancedbox")} &#160;&#160;Use billing address
+    .col-md-4.col-lg-3.col-lg-offset-1
+      %h2= t(:orders_summary)
+      .summary-title
+        %nobr= t(:items_total)
+        = number_to_currency(@order.total_price)
+        %br/
+        %nobr= t(:order_total)
+        = number_to_currency(@order.total_price)
+  %div.center
+    = button_tag(t(:save_continue), class: 'btn btn-primary', type: 'submit', name: 'address')
+
+:javascript
+  $(document).ready(function(){
+    $("#advancedbox").change(function(){
+      if( $(this).is(':checked') ){
+        $('#advancedopts').hide();
+      } else {
+        $('#advancedopts').show();
+      }
+    });
+  });

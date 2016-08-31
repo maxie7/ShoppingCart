@@ -1,0 +1,15 @@
+%row
+  .container
+    .col-md-4
+      %p.title
+      %h3= @book.title
+      %p.price
+      %h3= number_to_currency @book.price
+      %p.date
+        Quantity of Books: #{@book.quentity_books}
+      %p.date
+      %h4 Description:
+      = @book.description
+    .col-md-2
+      = render partial: 'shopping_cart/order_items/add_to_cart', locals: {product: @book}
+    = link_to "cart" ,  shopping_cart.order_items_path

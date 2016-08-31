@@ -1,15 +1,26 @@
-= ShoppingCart
+## ShoppingCart
 
-This project rocks and uses MIT-LICENSE.
+A Shopping Cart for Rails!
 
-= Mounting the Engine
+## Installation instructions
 
-Specify the engine inside the Gemfile:
-  gem 'shopping_cart', path: "/path/to/shopping_cart"
+* Add in your gemfile and bundle gem 'shopping_cart', git: “https://github.com/maxie7/ShoppingCart”
+* After gem install, copy migrations and run db:migrate rake shopping_cart:install:migrations
+$ rake db:migrate
+* Add current_customer method to ApplicationController.
 
-By placing the gem in the Gemfile it will be loaded when Rails is loaded. It will first require lib/shopping_cart.rb from the engine, then lib/shopping_cart/engine.rb, which is the file that defines the major pieces of functionality for the engine.
+* In console:
+$ rails g shopping_cart:install
 
-To make the engine's functionality accessible from within an application, it needs to be mounted in that application's config/routes.rb file.
+After installation define your class-name in 'app/config/initializers/shopping_cart.rb'
+By default: ShoppingCart.customer_class = “Customer”
 
-In config/routes.rb :
-  mount ShoppingCart::Engine, at: "/cart"
+  ShoppingCart.product_class  = "Book"
+
+* Then define your routes in routes.rb
+By default: mount ShoppingCart::Engine, at: '/cart', as: 'ShoppingCart'
+
+## Views
+
+* In console:
+$ rails g shopping_cart:view
