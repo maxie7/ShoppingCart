@@ -11,6 +11,7 @@ require 'database_cleaner'
 require 'faker'
 require 'shoulda-matchers'
 include Warden::Test::Helpers
+include ActionView::Helpers::NumberHelper
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
