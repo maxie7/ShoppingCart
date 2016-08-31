@@ -3,13 +3,13 @@ require 'rails_helper'
 module ShoppingCart
   feature 'view all order items, and manipulate with them' do
     given(:customer) {FactoryGirl.create(:customer)}
+    given!(:product) {FactoryGirl.create(:product)}
+    given!(:order_item) {FactoryGirl.create(:order_item, product: product, quantity: 3)}
+    given(:order){FactoryGirl.create(:order, customer: customer, order_item: order_item)}
 
     before do
       login_as customer
-      visit book_path(product)
-      fill_in 'orders[quantity]', with: 3
-      click_button 'Add to Cart'
-      click_on 'CART'
+      visit order_items_path
     end
     given!(:product) {FactoryGirl.create(:product)}
 
