@@ -1,8 +1,8 @@
-== ShoppingCart
+==ShoppingCart
 
 A Shopping Cart for Rails!
 
-== Installation instructions
+==Installation instructions
 
 * Add in your gemfile and bundle gem 'shopping_cart', git: “https://github.com/maxie7/ShoppingCart”
 * After gem install, copy migrations and run db:migrate rake shopping_cart:install:migrations
@@ -20,7 +20,7 @@ By default: ShoppingCart.customer_class = “Customer”
 * Then define your routes in routes.rb
 By default: mount ShoppingCart::Engine, at: '/cart', as: 'ShoppingCart'
 
-== Views
+==Views
 
 * In console:
   rails g shopping_cart:view
