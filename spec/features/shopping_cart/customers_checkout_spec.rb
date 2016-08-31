@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-include OrderStepHelper
 module ShoppingCart
   feature 'fill order step by step' do
     given(:customer) {FactoryGirl.create(:customer)}
