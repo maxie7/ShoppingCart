@@ -6,6 +6,8 @@ module ShoppingCart
     let!(:order){customer.order_in_progress}
     let!(:order_steps_form){OrderStepsForm.new(order)}
 
+    routes { ShoppingCart::Engine.routes }
+
     before do
       sign_in customer
     end
