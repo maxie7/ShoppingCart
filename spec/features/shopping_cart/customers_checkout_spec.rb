@@ -1,5 +1,5 @@
-require 'features/features_spec_helper'
-include ActionView::Helpers::NumberHelper
+require 'rails_helper'
+
 include OrderStepHelper
 feature 'fill order step by step' do
   given(:customer) {FactoryGirl.create(:customer)}
