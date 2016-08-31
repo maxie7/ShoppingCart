@@ -1,5 +1,4 @@
 require 'rails_helper'
-include ActionView::Helpers::NumberHelper
 
 feature 'Add book' do
   given(:customer) {FactoryGirl.create(:customer)}
@@ -18,4 +17,4 @@ feature 'Add book' do
     expect(page).to have_content '(3)'
     expect(page).to have_content number_to_currency product.price*3
   end
-end 
+end
