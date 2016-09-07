@@ -13,6 +13,7 @@ $ rake db:migrate
 $ rails g shopping_cart:install
 
 After installation define your class-name in 'app/config/initializers/shopping_cart.rb'
+
 By default: ShoppingCart.customer_class = “Customer”
 
   ShoppingCart.product_class  = "Book"

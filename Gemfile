@@ -9,7 +9,9 @@ gemspec
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
-gem 'devise', group: [:development, :test]
+# gem 'devise', group: [:development, :test]
+# gem 'shopping_cart', git: 'https://github.com/maxie7/ShoppingCart'
+# gem 'aasm', group: [:development, :test]
 # gem 'pg', group: [:development, :test]
 # gem 'shoulda-matchers', group: [:development, :test]
 # To use a debugger

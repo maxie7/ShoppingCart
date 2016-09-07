@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
 
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", "~> 4.2.6"
-  s.add_dependency "aasm",  '~> 4.2.0'
+  s.add_dependency 'rails', '~> 4.2.6'
+  s.add_dependency 'aasm'
   s.add_dependency 'wicked'
   s.add_dependency 'bootstrap-sass', '~> 3.3.6'
 
