@@ -38,7 +38,8 @@ RSpec.configure do |config|
   config.include Capybara::RSpecMatchers
 
   # Devise Helpers
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  # config.include Devise::TestHelpers, type: :controller
   config.include Devise::TestHelpers, type: :view
 
   config.use_transactional_fixtures = false

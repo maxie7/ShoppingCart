@@ -1,5 +1,6 @@
 module ShoppingCart
   class ApplicationController < ShoppingCart.parent_controller.constantize
+  # class ApplicationController < ActionController::Base
 
     before_action set_current_order unless ShoppingCart.set_order_on_each_request
 

@@ -1,6 +1,6 @@
 FactoryGirl.define do
 
-  factory :product,  :class => 'Book'do
+  factory :product,  :class => 'Book' do
     title {Faker::Commerce.product_name }
     description    { Faker::Commerce.product_name }
     price    { Faker::Number.number(4) }

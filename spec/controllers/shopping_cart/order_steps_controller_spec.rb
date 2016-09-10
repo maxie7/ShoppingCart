@@ -3,8 +3,8 @@ require 'rails_helper'
 module ShoppingCart
   RSpec.describe OrderStepsController, type: :controller do
     let(:customer) { FactoryGirl.create(:customer) }
-    let!(:order){customer.order_in_progress}
-    let!(:order_steps_form){OrderStepsForm.new(order)}
+    let!(:order){ customer.order_in_progress }
+    let!(:order_steps_form){ OrderStepsForm.new(order) }
 
     routes { ShoppingCart::Engine.routes }
 
